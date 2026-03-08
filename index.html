@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Error</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#00ff9c;
+    font-family:monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+#mainText{
+    text-align:center;
+    font-size:22px;
+    line-height:1.6;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 24px;
+    background:black;
+    border:1px solid #00ff9c;
+    color:#00ff9c;
+    font-family:monospace;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00ff9c;
+    color:black;
+}
+
+.glitch{
+    position:absolute;
+    font-size:14px;
+    color:#00ff9c;
+    opacity:0.9;
+}
+
+#final{
+    position:absolute;
+    color:white;
+    font-size:32px;
+    text-align:center;
+    opacity:0;
+    transition:opacity 2s;
+}
+</style>
+</head>
+
+<body>
+
+<div id="mainText">
+Loading feelings...<br>
+...<br>
+Error.<br>
+Too much love detected.<br>
+System overload.
+</div>
+
+<button onclick="fixSystem()">Try to fix feelings</button>
+
+<div id="final">Restarting system...<br><br>I love you more than anything.</div>
+
+<script>
+
+function fixSystem(){
+
+    let messages = [
+        "ERROR",
+        "Too much love detected",
+        "System overload",
+        "Feelings overflow",
+        "Critical affection level"
+    ];
+
+    let count = 0;
+
+    let interval = setInterval(()=>{
+
+        let text = document.createElement("div");
+        text.className="glitch";
+        text.innerText = messages[Math.floor(Math.random()*messages.length)];
+
+        text.style.left = Math.random()*100+"vw";
+        text.style.top = Math.random()*100+"vh";
+
+        document.body.appendChild(text);
+
+        count++;
+
+        if(count>40){
+            clearInterval(interval);
+            blackout();
+        }
+
+    },80);
+
+}
+
+function blackout(){
+
+    setTimeout(()=>{
+
+        document.body.innerHTML="";
+
+        document.body.style.background="black";
+
+        let final=document.createElement("div");
+        final.id="final";
+        final.innerHTML="Restarting system...<br><br>I love you more than anything.";
+
+        document.body.appendChild(final);
+
+        setTimeout(()=>{
+            final.style.opacity=1;
+        },200);
+
+    },1500);
+
+}
+
+</script>
+
+</body>
+</html>
